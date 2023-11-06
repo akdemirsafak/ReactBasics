@@ -1,4 +1,4 @@
-##
+## React Basics
 
 npx create-react-app first-project
 node-modules directory yoksa package.json içerisindeki dependency'leri yüklemek için npm i dememiz yeterli.
@@ -8,3 +8,7 @@ app.js de veya react projelerinde bulunan div tag'leri aslında html elementi de
 PWA => tarayıcıdan indirdiğimiz manifest.json bağlantılıdır.
 * => manifest.json'dan icon'ları, name'ini vb.. belirleyebiliriz.
 * => robots.txt seo içindir arama motorlarının gelip sitede nereleri taramasını istediğini belirlenir.
+
+### props
+componentlere parametre girme durumuna props denir.
+property'ler de readonly'dir.
