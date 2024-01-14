@@ -1,30 +1,17 @@
 
 function App() {
-
-  const clickHandle=()=>{
-     var number=5; //var tekrardan tanımlanabilen bir keyword olduğu için var yerine let kullanımı tercih edilir buradaki amaç karmaşayı önlemektir.
-    let number2=10;
-    const sabit="h";
-    //sabit='m'; 
-    // alert("Hello");
-
-    // console.log(number);
-    // console.log(number2);
-    
-    var person= {
-      name:"safak",
-      lastname:"akdemir",
-      age:27
-    };
-   
-    console.log(person)
-    console.log(person.name);
+const clickHandle=()=>{
+    const student={id:1,name:"adam",age:6};
+    const student2={id:8,name:"lana",age:15};
+    const students=[student,student2];
+    console.log(students[0].name);
+    students[3]={id:2,name:"ali",age:27};
+    console.log(students[3].name);
+    console.log(students[2]);
   }
-     //çoklu satırda {} içerisinde yazabiliriz.
- 
   return (
     <div className="App">
-    <button onClick={clickHandle}>Tıkla</button>
+    <button onClick={()=>clickHandle()}>Tıkla</button>
     </div>
   );
 }
