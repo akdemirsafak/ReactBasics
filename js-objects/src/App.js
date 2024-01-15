@@ -8,6 +8,8 @@ const clickHandle=()=>{
     students[3]={id:2,name:"ali",age:27};
     console.log(students[3].name);
     console.log(students[2]);
+    students.push({id:7,name:"person",age:67});
+    console.log(students);
   }
   return (
     <div className="App">
