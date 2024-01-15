@@ -1,19 +1,41 @@
-
+import React,{ useState } from 'react';
 function App() {
-const clickHandle=()=>{
-    const student={id:1,name:"adam",age:6};
-    const student2={id:8,name:"lana",age:15};
-    const students=[student,student2];
-    console.log(students[0].name);
-    students[3]={id:2,name:"ali",age:27};
-    console.log(students[3].name);
-    console.log(students[2]);
-    students.push({id:7,name:"person",age:67});
-    console.log(students);
-  }
+    
+  const[students,setStudents]= useState([]); //useState() içerisinde bir değer vermemizin sebebi null check yapmak istemeemizden dolayı.
+
+  const clickHandle=()=>{
+
+    const friends=[];
+    friends.push({id:1,name:"anna",age:25,gender:"fm"})
+    friends.push({id:2,name:"zack",age:19,gender:"m"})
+    friends.push({id:3,name:"mirella",age:22,gender:"fm"})
+    friends.push({id:4,name:"Patrick",age:27,gender:"m"});
+
+
+    setStudents(friends);
+
+    //console.log(students);
+
+    for (let index = 0; index < friends.length; index++) {
+      console.log(friends[index]);
+    }
+
+
+    };
   return (
     <div className="App">
     <button onClick={()=>clickHandle()}>Tıkla</button>
+    {
+      students.map((student)=>{
+        return <h4 key={student.id} >Name : {student.name} | Age {student.age} | Gender : {student.gender}</h4>
+      
+        //eğer state'in başlangıç değeri olmasaydı aşağıdaki kullanım yapılabilirdi.:
+        // students && students.map((student)=>{
+        // return <h4 key={student.id} >Name : {student.name} | Age {student.age} | Gender : {student.gender}</h4>
+      
+      })
+
+    }
     </div>
   );
 }
