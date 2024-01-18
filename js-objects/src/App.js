@@ -1,62 +1,42 @@
-import React,{ useState } from 'react';
+import React,{ useEffect, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
-    
-  const[ user, setUser ]= useState({}); 
+  const [data,setData]=useState(0);
+    // const getDatas= async()=>{
 
-  const[users,setUsers]=useState([]);
+    //   setTimeout(()=>{
+    //     setData(5);
+    //   },1500);
+    // }
+      const getDatas= async()=>{
+        //Data return etmesi için promise değeri oluşturmamız gerekli
 
-  const changeHandler = (e)=>{
-    setUser({...user, [e.target.name] : e.target.value});
-  }
-  const clickHandler = ()=>{
-    setUsers([...users,user]);
-    setUser({});
-  }
+     return new Promise((resolve,reject)=>{
+        setTimeout(()=>{
+        resolve(5);
+      },2000);
+      if(data===1){
+        reject("Başarısız");
+      }
+     })
+     //Resolve işlem başarılı gerçekleştiği durumda, reject ise işlem başarısızlığa uğradığı durumda 
+    }
+    //---------
+    useEffect(()=>{
+      getDatas()
+      .then((result)=>setData(result))
+      .catch((error)=>{alert(error)});
+    },[])
+
 
   return (
-    <>
-      <main className='container my-5'>
-
-      <input type='text' placeholder='Name' name='Name'  className='d-block mb-2' onChange={(e)=>changeHandler(e)}/>
-      <input type='text' placeholder='LastName' name='LastName' className='d-block mb-2' onChange={(e)=>changeHandler(e)} />
-      <input type='number' placeholder='Age' name='Age' className='d-block mb-2'  onChange={(e)=>changeHandler(e)}/>
-      
-      <h3>{user.Name} {user.LastName} {user.Age}</h3>
-
-      <button onClick={()=>clickHandler()}> Ekle </button>
+    <div>
+      {/* <button onClick={getDatas}>Tıkla</button> */}
       {
-        // Eğer users daha önce tanımlanmadıysa undefined'dır. Undefined'ın property'si olmaz. users && users.length şeklinde kullanabiliriz.
-        users.length===0 ? <h3>Öğrenci yok.</h3> :
-        <table>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>LastName</th>
-              <th>Age</th>
-            </tr>
-          </thead>
-          <tbody>
-            {
-              users.map((user,index) => 
-              {
-                return (
-                  <tr key={index}>
-                    <td>{user.Name}</td>
-                    <td>{user.LastName}</td>
-                    <td>{user.Age}</td>
-                  </tr>
-                )
-              })
-            } 
-          </tbody>
-
-        </table>
+        data===0 ? <p>Yükleniyor</p>:<p>{data}</p>
       }
-      
-      </main>
-    </>
+    </div>
   );
 }
 
