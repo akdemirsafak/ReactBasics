@@ -1,32 +1,40 @@
 import React,{ useEffect, useState } from 'react';
+import axios from 'axios';
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   const [data,setData]=useState([]);
-   // https://jsonplaceholder.typicode.com/
-
+  
     useEffect(()=>{
-      fetch("https://jsonplaceholder.typicode.com/posts")
-      .then((response)=>{
-        return response.json();
+      axios.get("https://localhost:7079/Content").then((response)=>{
+        setData(response.data.data);
+        console.log(response.data.data);
       })
-      .then((incomingData)=>{
-        setData(incomingData);
-      })
+      // fetch("https://localhost:7079/Content")
+      // .then((response)=>{
+      //   return response.json();
+      // })
+      // .then((incomingData)=>{
+      //   setData(incomingData.data); //Response'umuzda error data gibi alanlar vardı biz data ile ilgileniyoruz.
+      // })
     },[]);
+    
 
   return (
     <div>
+
+      Gelen veri miktarı :{data.length===0?"Veriler yükleniyor":data.length}
       <ul>
         {
           
           data.map((item,index)=>{
             return (
-            <li key={index}>{`Id : ${item.id} - Name:  ${item.title}`}</li>
+            <li key={index}>{`Id : ${item.id} - Name:  ${item.name}`}</li>
           )
           })
         }
-   </ul>
+    </ul>
     </div>
   );
 }
