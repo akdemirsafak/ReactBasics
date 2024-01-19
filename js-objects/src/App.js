@@ -1,40 +1,29 @@
-import React,{ useEffect, useState } from 'react';
-import axios from 'axios';
-
+import React,{ useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { userRequests } from './requests/user';
 
 function App() {
-  const [data,setData]=useState([]);
+  const [user,setUser]=useState({});
   
-    useEffect(()=>{
-      axios.get("https://localhost:7079/Content").then((response)=>{
-        setData(response.data.data);
-        console.log(response.data.data);
-      })
-      // fetch("https://localhost:7079/Content")
-      // .then((response)=>{
-      //   return response.json();
+    //useEffect(()=>{
+      // axios.get("https://localhost:7079/Content").then((response)=>{
+      //   setData(response.data.data);
+      //   console.log(response.data.data);
       // })
-      // .then((incomingData)=>{
-      //   setData(incomingData.data); //Response'umuzda error data gibi alanlar vardı biz data ile ilgileniyoruz.
-      // })
-    },[]);
-    
-
+    //},[]);
+    const clickHandle = ()=>{
+      userRequests.register(user)
+        .then((response)=>{
+          console.log(response);
+        }).catch() //catch for error cases
+    }
   return (
-    <div>
-
-      Gelen veri miktarı :{data.length===0?"Veriler yükleniyor":data.length}
-      <ul>
-        {
-          
-          data.map((item,index)=>{
-            return (
-            <li key={index}>{`Id : ${item.id} - Name:  ${item.name}`}</li>
-          )
-          })
-        }
-    </ul>
+    <div className='container mt-5'>
+        <input className='form-control' name='email' type='email' placeholder='Email' onChange={(e)=>setUser({...user, email : e.target.value})}/>
+        <input className='form-control' name='password' type='text' placeholder='Password' onChange={(e)=>setUser({...user, password : e.target.value})}/>
+        <input className='form-control' name='confirmPassword' type='text' placeholder='Password Again' onChange={(e)=>setUser({...user, confirmPassword : e.target.value})}/>
+        <button className='btn btn-primary' onClick={()=>clickHandle()}>Register</button>
+      
     </div>
   );
 }
