@@ -8,3 +8,5 @@ app.js de veya react projelerinde bulunan div tag'leri aslında html elementi de
 PWA => tarayıcıdan indirdiğimiz manifest.json bağlantılıdır.
 * => manifest.json'dan icon'ları, name'ini vb.. belirleyebiliriz.
 * => robots.txt seo içindir arama motorlarının gelip sitede nereleri taramasını istediğini belirlenir.
+
+--Fatih Baytar Youtube videosundan faydalanılmıştır.
